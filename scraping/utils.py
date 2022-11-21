@@ -15,7 +15,7 @@ def get_detail(url):
     title = driver.find_element(by=By.XPATH, value='//*[@id="module_product_title_1"]/div/div/span')
     current_price = driver.find_element(by=By.XPATH, value='//*[@id="module_product_price_1"]/div/div/span')
     original_price = driver.find_element(by=By.XPATH, value='//*[@id="module_product_price_1"]/div/div/div/span[1]')
-    seller = driver.find_element(by=By.XPATH, value='//*[@id="module_seller_info"]/div/div[1]/div[1]/div[2]/a[1]')
+    seller = driver.find_element(by=By.XPATH, value='//*[@id="module_seller_info"]/div/div[1]/div[1]/div[2]/a')
 
     product = {
         'title':title.text,

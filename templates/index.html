@@ -1,0 +1,59 @@
+{% extends 'base/base.html' %}
+{% block title %}Home{% endblock title %}
+{% block body %}
+    <div class="container mt-3">
+        <center><h1>Welcome to Django Price Tracker Web App</h1></center>
+    
+        <div class="row">
+            <div class="col-md-8">
+                <center><h3>List of Products</h3></center>
+                {% for product in products %}
+                    <div class="container">
+                        <div class="card border-2 border-danger">
+                            <div class="card-header border-2 border-warning">
+                            <h4>{{ product.name }}</h4>
+                            </div>
+                            <div class="card-body">
+                            <p class="card-text"><strong>URL: </strong><a href="{{ product.url }}">{{ product.url }}</a></p>
+                            <p class="card-text"><strong>Current Price: </strong>{{ product.current_price }}</p>
+                            <p class="card-text"><strong>Old Price: </strong>{{ product.old_current_price }}</p>
+                            <p class="card-text"><strong>Price Difference: </strong>{{ product.current_price_difference }}</p>
+                            <form action="" method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="delete" value="True" id="id_delete">
+                                <input type="hidden" name="pk" value="{{ product.id }}" id="id_pk">
+                                <input type="submit" value="Delete" class="btn btn-outline-warning">
+                            </form>
+                            </div>
+                        </div>
+                        <br>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="col-md-4">
+                <section class="border border-info container mt-5">
+                    <div class="container p-3">
+                        <h3>Summary</h3>
+                        <p><strong>Total No. Of Products: </strong>{{ products_count }}</p>
+                        <p><strong>Total No. Of Products Discounted: {{ no_products_discounted }}</strong></p>
+                    </div>
+                </section>
+                <section class="mt-3 container border border-warning">
+                    <div class="container">
+                        <form action="" method="post" class="container p-3">
+                            <h3>Add Product Url</h3>
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <input type="submit" value="Submit" class="btn btn-outline-secondary">
+                        </form>
+                    </div>
+                </section>
+                <section class="mt-3 container border border-warning">
+                    <div class="container p-3">
+                        <center><a href="{% url 'scraping:update' %}" type="button" class="btn btn-outline-success">Update Prices</a></center>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+{% endblock body %}
