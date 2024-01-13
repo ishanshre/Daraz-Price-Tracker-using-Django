@@ -9,7 +9,10 @@ from selenium.webdriver.common.by import By
 options = Options()
 options.headless = True
 options.add_argument("--window-size=1366,768")
-driver = webdriver.Chrome(options=options, service=Service(ChromeDriverManager().install()))
+# driver = webdriver.Chrome(options=options, service=Service(ChromeDriverManager().install()))
+service = Service()
+options = webdriver.ChromeOptions()
+driver = webdriver.Chrome(service=service, options=options)
 def get_detail(url):
     driver.get(url)
     title = driver.find_element(by=By.XPATH, value='//*[@id="module_product_title_1"]/div/div/span')
